@@ -1,0 +1,73 @@
+package caixaeletronico;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+
+public class GUI {
+    private ICaixaEletronico caixa;
+
+    public GUI(Class<CaixaEletronico> classeCaixa) {
+        try {
+            
+            this.caixa = classeCaixa.getDeclaredConstructor().newInstance();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void show() {
+        JFrame frame = new JFrame("Caixa eletrônico");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 450);
+        frame.setLayout(new GridLayout(0, 1, 1 , 1));
+
+        
+        frame.add(new JLabel("Modulo do Cliente:", SwingConstants.CENTER));
+        addButton(frame, "Efetuar Saque", e -> {
+            String input = JOptionPane.showInputDialog("Valor do Saque:");
+            if (input != null) {
+                String resultado = caixa.sacar(Integer.parseInt(input));
+                JOptionPane.showMessageDialog(frame, resultado);
+            }
+        });
+
+        
+        frame.add(new JLabel("Modulo do Administrador:", SwingConstants.CENTER));
+        addButton(frame, "Relatorio de Cedulas", e -> JOptionPane.showMessageDialog(frame, caixa.pegaRelatorioCedulas()));
+        addButton(frame, "Valor total disponivel", e -> JOptionPane.showMessageDialog(frame, caixa.pegaValorTotalDisponivel()));
+        addButton(frame, "Reposicao de Cedulas", e -> {
+            String cedula = JOptionPane.showInputDialog("Valor da Cédula:");
+            String qtd = JOptionPane.showInputDialog("Quantidade:");
+            if (cedula != null && qtd != null) {
+                String res = caixa.reposicaoCedulas(Integer.parseInt(cedula), Integer.parseInt(qtd));
+                JOptionPane.showMessageDialog(frame, res);
+            }
+        });
+        addButton(frame, "Cota Minima", e -> {
+            String min = JOptionPane.showInputDialog("Valor Mínimo:");
+            if (min != null) {
+                String res = caixa.armazenaCotaMinima(Integer.parseInt(min));
+                JOptionPane.showMessageDialog(frame, res);
+            }
+        });
+
+       
+        frame.add(new JLabel("Modulo de Ambos:", SwingConstants.CENTER));
+        addButton(frame, "Sair", e -> {
+            // Chama o extrato final antes de fechar 
+            if (caixa instanceof CaixaEletronico) {
+                ((CaixaEletronico) caixa).mostrarExtratoFinal();
+            }
+            System.exit(0);
+        });
+
+        frame.setVisible(true);
+    }
+
+    private void addButton(JFrame frame, String text, ActionListener listener) {
+        JButton button = new JButton(text);
+        button.addActionListener(listener);
+        frame.add(button);
+    }
+}
