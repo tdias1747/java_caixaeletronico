@@ -19,7 +19,7 @@ public class GUI {
             e.printStackTrace();
         }
     }
-// EXIBIÇÃO DA JANELA PRINICIPAL DA INTERFACE
+// EXIBIÇÃO DA JANELA PRINCIPAL DA INTERFACE
     public void show() {
         JFrame frame = new JFrame("Caixa eletrônico");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // CASO FECHE ELE IRÁ SAIR
@@ -43,7 +43,7 @@ public class GUI {
 addButton(frame, "Relatorio de Cedulas", e -> JOptionPane.showMessageDialog(frame, caixa.pegaRelatorioCedulas())); 
         addButton(frame, "Valor total disponivel", e -> JOptionPane.showMessageDialog(frame, caixa.pegaValorTotalDisponivel()));
         addButton(frame, "Reposicao de Cedulas", e -> {
-            String cedula = JOptionPane.showInputDialog("Valor da Cédula:"); // CRIAÇÃO DE UMA CAIXA PARA INSERIR VALORES ETEXTO
+            String cedula = JOptionPane.showInputDialog("Valor da Cédula:"); // CRIAÇÃO DE UMA CAIXA PARA INSERIR VALORES E TEXTO
             String qtd = JOptionPane.showInputDialog("Quantidade:");
             if (cedula != null && qtd != null) {
                 String res = caixa.reposicaoCedulas(Integer.parseInt(cedula), Integer.parseInt(qtd)); // CONVERSÃO DE DADOS DE TEXTO (STRING) EM TIPO INTEIRO
@@ -63,9 +63,9 @@ addButton(frame, "Relatorio de Cedulas", e -> JOptionPane.showMessageDialog(fram
         addButton(frame, "Sair", e -> {
 
 // AMOSTRAGEM DO EXTRATO FINAL
-// UTILIZAÇAÕ DO INSTACEOF COMO VERIFICAÇÃO DO JAVA SE O VALOR REFERIDO É VERFDADEIRO (NÃO POSSUI ERROS)
+// UTILIZAÇão DO INSTACEOF COMO VERIFICAÇÃO DO JAVA SE O VALOR REFERIDO É VERDADEIRO (NÃO POSSUI ERROS)
             if (caixa instanceof CaixaEletronico) {
-                ((CaixaEletronico) caixa).mostrarExtratoFinal(); // COM O ACESSO GARANTIDO IRÁ PARTICAR A MOSTRAGEM DO EXTRATO COM TODAS AS TRANSAÇÕES
+                ((CaixaEletronico) caixa).mostrarExtratoFinal(); // COM O ACESSO GARANTIDO IRÁ PraTICAR A MOSTRAGEM DO EXTRATO COM TODAS AS TRANSAÇÕES
             }
             System.exit(0);
         });
