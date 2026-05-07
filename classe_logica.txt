@@ -10,6 +10,7 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
     private int[][] cedulas = {
         {100, 100}, {50, 200}, {20, 300}, {10, 350}, {5, 450}, {2, 500}
     };
+
 // O CAIXA IRÁ PARAR DE FUNCIONAR CASO O TOTAL CHEGUE A 0
     private int cotaMinima = 0;
     
@@ -19,7 +20,8 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
 // USO DE OVERRIDE PARA NÃO TER ERRO DE NOMEAÇÃO DOS MÉTODOS E GERAR ERROS NO CÓDIGO (GARANTE A IGUALDADE DOS MÉTODOS) @Override
     public String pegaValorTotalDisponivel() {
         int total = 0;
-// OCORRE A MULTIPLICAÇÃO DA MATRIZ QUE POSSUI OS VALORES E A QUANTIDADE DE CEDULAS, DEPOIS DA MULTIPLICAÇÃO VIRÁ A SOMA E COM FIM DANDO O RESULTADO TOTAL QUE POSSUI NO BANCO
+
+// OCORRE A MULTIPLICAÇÃO DA MATRIZ QUE POSSUI OS VALORES E A QUANTIDADE DE CÉDULAS, DEPOIS DA MULTIPLICAÇÃO VIRÁ A SOMA E COM FIM DANDO O RESULTADO TOTAL QUE POSSUI NO BANCO
 
         for (int i = 0; i < cedulas.length; i++) {
             total += cedulas[i][0] * cedulas[i][1];
@@ -77,18 +79,18 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
             return "Saldo insuficiente";
         }
 
-        int restante = valor; // OPREAÇÃO QUE VAI REGISTRAR O QUANTO D EVALOR FALTA PARA O USUÁRIO
+        int restante = valor; // OPREAÇÃO QUE VAI REGISTRAR O QUANTO DE VALOR FALTA PARA O USUÁRIO
         int totalCedulasSaque = 0; // TOTAL DE CÉDULAS QUE FOI RETIRADA DO SAQUE
-        int[] quantidadePorNota = new int[cedulas.length]; // ARRAY QUE VAI CALACULAR QUANTAS NOTAS SERÁ ENTREGUE AO USUÁRIO
+        int[] quantidadePorNota = new int[cedulas.length]; // ARRAY QUE VAI CALCULAR QUANTAS NOTAS SERÁ ENTREGUE AO USUÁRIO
 
-// OPERAÇÃO DE CONTROLE PARA NO SAQUE COLOCAR OS MAIORESVALORES DE NOTAS PRIMEIRO (DAR O MÁXIMO DE QUANTIDADE QUE CONSEGUIR DE 100 E 50)
+// OPERAÇÃO DE CONTROLE PARA NO SAQUE COLOCAR OS MAIORES VALORES DE NOTAS PRIMEIRO (DAR O MÁXIMO DE QUANTIDADE QUE CONSEGUIR DE 100 E 50)
         for (int i = 0; i < cedulas.length; i++) {
             int valorNota = cedulas[i][0];
             int disponivel = cedulas[i][1];
 // O MATH MIN VAI ANALISAR SE A QUANTIDADE PEGA É DO ESTOQUE OU DO QUE PRECISA (ÁNALISE DE VALORES DO ESTOQUE)
             int qtdAUsar = Math.min(restante / valorNota, disponivel); 
 
-            quantidadePorNota[i] = qtdusar; // GUARDA NO ARRAY QUANTAS NOTAS ERÃO UTILIZADAS
+            quantidadePorNota[i] = qtdusar; // GUARDA NO ARRAY QUANTAS NOTAS SERÃO UTILIZADAS
             restante -= qtdusar * valorNota; // CONTA QUANTAS NOTAS AINDA FALTAM PARA COBRIR O VALOR DO USUÁRIO
             totalCedulasSaque += qtdusar; // CONTA QUANTAS CÉDULAS FORAM ENTREGUES
         }
