@@ -1,14 +1,21 @@
 package caixaeletronico;
 
+*IMPLEMENTAÇÃO DA INTERFACE QUE VAI SUEGERIR AS OPERAÇÕES OBRIGATÓRIAS PARA O FUNCIONAMENTO DAS CLASSES, OBRIGAÇÕES QUE AS CLASSES DEVEM SEGUIR */
+
 public interface ICaixaEletronico {
-    
+
+// IRÁ RETORNAR A QUANTIDADE DE VALOR DISPONÍVEL NO CAIXA
 	public String pegaValorTotalDisponivel();
-    
+
+// REALIZA A OPERAÇÃO DO SAQUE E QUAL FOI SEU RETORNO    
 	public String sacar(Integer valor);
-	
+
+// REALIZA A CONTAGEM DA QUANTIDADE DE CÉDULAS PRESENTES NO SISTEMA
     public String pegaRelatorioCedulas();
-    
+
+// OPERAÇÃO QUE REALIZA A REPOSIÇÃO DE CEDULAS 
     public String reposicaoCedulas(Integer cedula, Integer quantidade);
-    
+
+// ARMAZENA VALORES FIXOS OU O LIMITE QUE O SAQUE DEVA IR
     public String armazenaCotaMinima(Integer minimo);
 }
