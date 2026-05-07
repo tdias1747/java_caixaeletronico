@@ -126,7 +126,8 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
             System.out.println(linha);
         }
     }
-// OPERAÇÃO QUE SE CONECTA COM A INTERFACE GUI
+
+// OPERAÇÃO QUE SE CONECTA COM A INTERFACE GUI PARA ELA SER INSTACIADA ("PARA ELA SER INICIADA")
     public static void main(String[] args) {
         GUI janela = new GUI(CaixaEletronico.class);
         janela.show();
