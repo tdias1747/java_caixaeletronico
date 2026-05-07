@@ -13,7 +13,7 @@ public interface ICaixaEletronico {
 // REALIZA A CONTAGEM DA QUANTIDADE DE CÉDULAS PRESENTES NO SISTEMA
     public String pegaRelatorioCedulas();
 
-// OPERAÇÃO QUE REALIZA A REPOSIÇÃO DE CEDULAS 
+// OPERAÇÃO QUE REALIZA A REPOSIÇÃO DE CÉDULAS 
     public String reposicaoCedulas(Integer cedula, Integer quantidade);
 
 // ARMAZENA VALORES FIXOS OU O LIMITE QUE O SAQUE DEVA IR
