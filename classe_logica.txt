@@ -88,7 +88,7 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
             int valorNota = cedulas[i][0];
             int disponivel = cedulas[i][1];
 // O MATH MIN VAI ANALISAR SE A QUANTIDADE PEGA É DO ESTOQUE OU DO QUE PRECISA (ÁNALISE DE VALORES DO ESTOQUE)
-            int qtdAUsar = Math.min(restante / valorNota, disponivel); 
+            int qtdusar = Math.min(restante / valorNota, disponivel); 
 
             quantidadePorNota[i] = qtdusar; // GUARDA NO ARRAY QUANTAS NOTAS SERÃO UTILIZADAS
             restante -= qtdusar * valorNota; // CONTA QUANTAS NOTAS AINDA FALTAM PARA COBRIR O VALOR DO USUÁRIO
