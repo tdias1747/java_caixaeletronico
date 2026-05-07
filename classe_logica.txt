@@ -1,0 +1,121 @@
+package caixaeletronico;
+
+import java.util.ArrayList;
+
+import java.util.List;      
+
+public class CaixaEletronico implements ICaixaEletronico {
+
+    private int[][] cedulas = {
+        {100, 100}, {50, 200}, {20, 300}, {10, 350}, {5, 450}, {2, 500}
+    };
+
+    private int cotaMinima = 0;
+    
+   
+    private List<String> extrato = new ArrayList<>();
+
+    @Override
+    public String pegaValorTotalDisponivel() {
+        int total = 0;
+        for (int i = 0; i < cedulas.length; i++) {
+            total += cedulas[i][0] * cedulas[i][1];
+        }
+        return "Total disponível: R$ " + total;
+    }
+
+    @Override
+    public String reposicaoCedulas(Integer cedula, Integer quantidade) {
+        for (int i = 0; i < cedulas.length; i++) {
+            if (cedulas[i][0] == cedula) {
+                cedulas[i][1] += quantidade;
+               
+                extrato.add("REPOSIÇÃO: " + quantidade + " NOTAS DE R$ " + cedula);
+                return "REPOSIÇÃO REALIZADA COM SUCESSO:";
+            }
+        }
+        return "Cédula inválida";
+    }
+
+    @Override
+    public String pegaRelatorioCedulas() {
+        StringBuilder relatorio = new StringBuilder();
+        for (int i = 0; i < cedulas.length; i++) {
+            relatorio.append(cedulas[i][0]).append(" - ").append(cedulas[i][1]).append("\n");
+        }
+        return relatorio.toString();
+    }
+
+    @Override
+    public String sacar(Integer valor) {
+       
+    	if (valor <= 0) {
+            return "Valor inválido";
+        }
+    	
+    
+    	int totalAtual = 0;
+        for (int i = 0; i < cedulas.length; i++) {
+            totalAtual += cedulas[i][0] * cedulas[i][1];
+        }
+
+        if ((totalAtual - valor) < cotaMinima) {
+            return "Caixa Vazio: Chame o Operador"; 
+        }
+
+        if (valor > totalAtual) {
+            return "Saldo insuficiente";
+        }
+
+        int restante = valor;
+        int totalCedulasSaque = 0;
+        int[] quantidadePorNota = new int[cedulas.length];
+
+        for (int i = 0; i < cedulas.length; i++) {
+            int valorNota = cedulas[i][0];
+            int disponivel = cedulas[i][1];
+            int qtdAUsar = Math.min(restante / valorNota, disponivel);
+
+            quantidadePorNota[i] = qtdAUsar;
+            restante -= qtdAUsar * valorNota;
+            totalCedulasSaque += qtdAUsar;
+        }
+
+        if (restante != 0) {
+            return "Saque não realizado por falta de cédulas"; 
+        }
+
+     
+        if (totalCedulasSaque > 30) {
+            return "Limite de cédulas excedido";
+        }
+
+        
+        for (int i = 0; i < cedulas.length; i++) {
+            cedulas[i][1] -= quantidadePorNota[i]; 
+        }
+
+        
+        extrato.add("SAQUE: R$ " + valor + " E Saldo restante: R$ " + (totalAtual - valor));
+        return "Saque realizado com sucesso";
+    }
+
+    
+    public String armazenaCotaMinima(Integer minimo) {
+        this.cotaMinima = minimo;
+        return "Cota mínima definida";
+    }
+
+    
+    public void mostrarExtratoFinal() {
+        System.out.println("EXTRATO DO SAQUE E ATUALIZAÇÃO DO SALDO RESTANTE:");
+        for (String linha : extrato) {
+            System.out.println(linha);
+        }
+    }
+
+    public static void main(String[] args) {
+        GUI janela = new GUI(CaixaEletronico.class);
+        janela.show();
+    }
+}
