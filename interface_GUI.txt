@@ -22,7 +22,7 @@ public class GUI {
 // EXIBIÇÃO DA JANELA PRINCIPAL DA INTERFACE
     public void show() {
         JFrame frame = new JFrame("Caixa eletrônico");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // CASO FECHE ELE IRÁ SAIR
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // CASO FECHE A INTERFACE ELE IRÁ SAIR
         frame.setSize(295, 445); // FORNECIMENTO DO TAMANHO DOS CAMPOS
         frame.setLayout(new GridLayout(0, 1, 1 , 1)); // TAMANHO DO LAYOUT VERTICAL
 
@@ -65,7 +65,7 @@ addButton(frame, "Relatorio de Cedulas", e -> JOptionPane.showMessageDialog(fram
 // AMOSTRAGEM DO EXTRATO FINAL
 // UTILIZAÇão DO INSTACEOF COMO VERIFICAÇÃO DO JAVA SE O VALOR REFERIDO É VERDADEIRO (NÃO POSSUI ERROS)
             if (caixa instanceof CaixaEletronico) {
-                ((CaixaEletronico) caixa).mostrarExtratoFinal(); // COM O ACESSO GARANTIDO IRÁ PraTICAR A MOSTRAGEM DO EXTRATO COM TODAS AS TRANSAÇÕES
+                ((CaixaEletronico) caixa).mostrarExtratoFinal(); // COM O ACESSO GARANTIDO IRÁ PRATICAR A MOSTRAGEM DO EXTRATO COM TODAS AS TRANSAÇÕES
             }
             System.exit(0);
         });
