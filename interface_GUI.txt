@@ -1,53 +1,59 @@
 package caixaeletronico;
 
+
+// IMPORTAÇÃO DAS BIBLIOTECAS PARA CRIAÇÃO DE BOTÕES, MODIFICAÇÕES DE BOTÕES E DADOS RELACIONADOS A INTERFACE
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class GUI {
-    private ICaixaEletronico caixa;
+    private ICaixaEletronico caixa; // ESTÁ REFERENCIANDO A INTERFACE PRINCIPAL
 
-    public GUI(Class<CaixaEletronico> classeCaixa) {
+// USO DE TRY CATCH PARA CASO ESSA INTERFACE DER ERRO IMPRIMA O MOTIVO DESSE ERRO
+
+    public GUI(Class<CaixaEletronico> classeCaixa) { // AQUI ELA VAI REFERENCIAR A CaixaEletronico
         try {
-            
-            this.caixa = classeCaixa.getDeclaredConstructor().newInstance();
+            //ESSA OPERAÇÃO PEGA O CONSTRUTOR PADRÃO DE CAIXA ELETRONICO, CRIA UM NOVO OBJETO E PASSA PARA CAIXA
+            this.caixa = classeCaixa.getDeclaredConstructor().newInstance(); 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
+// EXIBIÇÃO DA JANELA PRINICIPAL DA INTERFACE
     public void show() {
         JFrame frame = new JFrame("Caixa eletrônico");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(295, 445);
-        frame.setLayout(new GridLayout(0, 1, 1 , 1));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // CASO FECHE ELE IRÁ SAIR
+        frame.setSize(295, 445); // FORNECIMENTO DO TAMANHO DOS CAMPOS
+        frame.setLayout(new GridLayout(0, 1, 1 , 1)); // TAMANHO DO LAYOUT VERTICAL
 
         
         frame.add(new JLabel("Modulo do Cliente:", SwingConstants.CENTER));
         addButton(frame, "Efetuar Saque", e -> {
-            String input = JOptionPane.showInputDialog("Valor do Saque:");
+            String input = JOptionPane.showInputDialog("Valor do Saque:"); // "DENTRO DO RETÂNGULO COLOQUE VALOR DO SAQUE"
             if (input != null) {
-                String resultado = caixa.sacar(Integer.parseInt(input));
-                JOptionPane.showMessageDialog(frame, resultado);
+                String resultado = caixa.sacar(Integer.parseInt(input)); // CONVERSÃO DE DADOS STRING SE TORNANDO INT E SE CONECTA COM MÉTODO SACAR QUE IRÁ RETORNA UMA MENSAGEM DE SAQUE CONCLUÍDO
+                JOptionPane.showMessageDialog(frame, resultado); // VISUALIZAÇÃO DO RESULTADO
             }
         });
 
         
-        frame.add(new JLabel("Modulo do Administrador:", SwingConstants.CENTER));
-        addButton(frame, "Relatorio de Cedulas", e -> JOptionPane.showMessageDialog(frame, caixa.pegaRelatorioCedulas()));
+        frame.add(new JLabel("Modulo do Administrador:", SwingConstants.CENTER)); //INSERE NA INTERFACE A FRASE MÓDULO DO ADMNISTRADOR
+
+        // ADICIONA O BOTÃO SE CONECTANDO COM O MÉTODO DA CLASSE PRINCIPAL (EX:PEGARELATORIOCEDULAS)
+addButton(frame, "Relatorio de Cedulas", e -> JOptionPane.showMessageDialog(frame, caixa.pegaRelatorioCedulas())); 
         addButton(frame, "Valor total disponivel", e -> JOptionPane.showMessageDialog(frame, caixa.pegaValorTotalDisponivel()));
         addButton(frame, "Reposicao de Cedulas", e -> {
-            String cedula = JOptionPane.showInputDialog("Valor da Cédula:");
+            String cedula = JOptionPane.showInputDialog("Valor da Cédula:"); // CRIAÇÃO DE UMA CAIXA PARA INSERIR VALORES ETEXTO
             String qtd = JOptionPane.showInputDialog("Quantidade:");
             if (cedula != null && qtd != null) {
-                String res = caixa.reposicaoCedulas(Integer.parseInt(cedula), Integer.parseInt(qtd));
+                String res = caixa.reposicaoCedulas(Integer.parseInt(cedula), Integer.parseInt(qtd)); // CONVERSÃO DE DADOS DE TEXTO (STRING) EM TIPO INTEIRO
                 JOptionPane.showMessageDialog(frame, res);
             }
         });
         addButton(frame, "Cota Minima", e -> {
-            String min = JOptionPane.showInputDialog("Valor Mínimo:");
+            String min = JOptionPane.showInputDialog("Valor Mínimo:"); // INSERE UMA CAIXA DE TEXTO PARA A DIGITAÇÃO
             if (min != null) {
-                String res = caixa.armazenaCotaMinima(Integer.parseInt(min));
+                String res = caixa.armazenaCotaMinima(Integer.parseInt(min)); // A TRANSFORMAÇÃO DOS DADOS STRINGS EM INTEIROS
                 JOptionPane.showMessageDialog(frame, res);
             }
         });
@@ -55,9 +61,11 @@ public class GUI {
        
         frame.add(new JLabel("Modulo de Ambos:", SwingConstants.CENTER));
         addButton(frame, "Sair", e -> {
-            // Chama o extrato final antes de fechar 
+
+// AMOSTRAGEM DO EXTRATO FINAL
+// UTILIZAÇAÕ DO INSTACEOF COMO VERIFICAÇÃO DO JAVA SE O VALOR REFERIDO É VERFDADEIRO (NÃO POSSUI ERROS)
             if (caixa instanceof CaixaEletronico) {
-                ((CaixaEletronico) caixa).mostrarExtratoFinal();
+                ((CaixaEletronico) caixa).mostrarExtratoFinal(); // COM O ACESSO GARANTIDO IRÁ PARTICAR A MOSTRAGEM DO EXTRATO COM TODAS AS TRANSAÇÕES
             }
             System.exit(0);
         });
@@ -65,6 +73,7 @@ public class GUI {
         frame.setVisible(true);
     }
 
+// AS CONFIGURAÇÕES DOS BOTÕES, CRIAÇÃO DE BOTÃO, RETIRADA DE BORDA DE TEXTO E REFERENCIANDO CÓDIGOS PARA O BOTÃO 
     private void addButton(JFrame frame, String text, ActionListener listener) {
         JButton button = new JButton(text);
         button.addActionListener(listener);
