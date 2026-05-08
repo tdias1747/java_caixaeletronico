@@ -119,7 +119,7 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
         return "Cota mínima definida";
     }
 
-    // OPERAÇÃO QUE ESTABELECE A VISUALIZAÇÃO DOEXTRATO DO SAQUE E O SALDO RESTANTE DO TOTAL
+    // OPERAÇÃO QUE ESTABELECE A VISUALIZAÇÃO DO EXTRATO DO SAQUE E O SALDO RESTANTE DO TOTAL
     public void mostrarExtratoFinal() {
         System.out.println("EXTRATO DO SAQUE E ATUALIZAÇÃO DO SALDO RESTANTE:");
         for (String linha : extrato) {
