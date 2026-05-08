@@ -77,7 +77,7 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
             return "Saldo insuficiente";
         }
 
-        int restante = valor; // OPREAÇÃO QUE VAI REGISTRAR O QUANTO DE VALOR FALTA PARA O USUÁRIO
+        int restante = valor; // OPERAÇÃO QUE VAI REGISTRAR O QUANTO DE VALOR FALTA PARA O USUÁRIO
         int totalCedulasSaque = 0; // TOTAL DE CÉDULAS QUE FOI RETIRADA DO SAQUE
         int[] quantidadePorNota = new int[cedulas.length]; // ARRAY QUE VAI CALCULAR QUANTAS NOTAS SERÁ ENTREGUE AO USUÁRIO
 
