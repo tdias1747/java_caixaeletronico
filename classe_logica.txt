@@ -93,7 +93,7 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
             totalCedulasSaque += qtdusar; // CONTA QUANTAS CÉDULAS FORAM ENTREGUES
         }
 
-// SE O RESTANTE DE CÉDULAS FOR IGUAL A 0, OU SEJA NÃO POSSUI MAIS CÉDULAS NO BANCO NÃO POSSIBILITANDO O SAQUE
+// VAI FAZER A ÁNALISE NO ESTOQUE E VERIFICAR SE POSSUI O VALOR SE NÃO ELE NÃO IRÁ FAZER O SAQUE (NÃO TEM QUE TER RESTANTE, DAR O VALOR DIRETO)
         if (restante != 0) {
             return "Saque não realizado por falta de cédulas"; 
         }
