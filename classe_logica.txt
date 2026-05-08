@@ -48,17 +48,15 @@ public class CaixaEletronico implements ICaixaEletronico { // IMPLEMENTAÇÃO DA
     @Override
 // UTILIZAÇÃO DO STRINGBUILDER PARA OTIMIZAÇÃO E MENOS OCUPAÇÃO DE DADOS NA MEMÓRIA, OU SEJA ELE VAI DERECIONAR O TEXTO DIRETAMENTE PARA O APPEND
 // UTILIZAÇÃO DE APPEND PARA MODIFICAR OBJETOS E ADICIONAR DADOS OU TEXTOS NO FINAL DO STRINGBUILDER (COLOCANDO OS VALORES - E O ESPAÇO)
-    public String pegaRelatorioCedulas() {
+     public String pegaRelatorioCedulas() {
         StringBuilder relatorio = new StringBuilder();
-// OPERAÇÃO PARA PEGAR QUANTIDADE DE CÉLULAS QUE POSSUI NA MATRIZ
         for (int i = 0; i < cedulas.length; i++) {
-            relatorio.append(cedulas[i][0]).append("R$").append(cedulas[i][1]).append("\n");
+            relatorio.append(cedulas[i][0]).append(" - ").append(cedulas[i][1]).append("\n");
         }
-// VALIDAÇÃO DO STRING BUILDER
         return relatorio.toString();
     }
 
-    @Override
+ @Override
     public String sacar(Integer valor) {
        // VERIFICAÇÃO SE O VALOR QUE QUEIRA SACAR É NEGATIVO (CASO FOR DARÁ INVÁLIDO)
     	if (valor <= 0) {
